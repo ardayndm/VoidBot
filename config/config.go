@@ -8,7 +8,12 @@ import (
 )
 
 type Config struct {
-	BotToken string
+	BotToken   string
+	DBHost     string
+	DBPort     string
+	DBUser     string
+	DBPassword string
+	DBName     string
 }
 
 func Load() *Config {
@@ -18,6 +23,11 @@ func Load() *Config {
 	}
 
 	return &Config{
-		BotToken: os.Getenv("BOT_TOKEN"),
+		BotToken:   os.Getenv("BOT_TOKEN"),
+		DBHost:     os.Getenv("DB_HOST"),
+		DBPort:     os.Getenv("DB_PORT"),
+		DBUser:     os.Getenv("DB_USER"),
+		DBPassword: os.Getenv("DB_PASSWORD"),
+		DBName:     os.Getenv("DB_NAME"),
 	}
 }

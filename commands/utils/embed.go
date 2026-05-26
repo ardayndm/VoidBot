@@ -8,6 +8,8 @@ type EmbedOptions struct {
 	Color       int
 	Fields      []*discordgo.MessageEmbedField
 	Footer      string
+	Thumbnail   string // Sağ üst köşedeki .png ikon URL'si
+	AuthorIcon  string // Başlığın solundaki minik .png ikon URL'si
 }
 
 var (
@@ -34,6 +36,22 @@ func BuildEmbed(opts EmbedOptions) *discordgo.MessageEmbed {
 		embed.Footer = &discordgo.MessageEmbedFooter{
 			Text: opts.Footer,
 		}
+	}
+
+	// Eğer bir Thumbnail URL'si verilmişse embed'e ekle
+	if opts.Thumbnail != "" {
+		embed.Thumbnail = &discordgo.MessageEmbedThumbnail{
+			URL: opts.Thumbnail,
+		}
+	}
+
+	// Eğer bir AuthorIcon URL'si verilmişse embed'e ekle
+	if opts.AuthorIcon != "" {
+		embed.Author = &discordgo.MessageEmbedAuthor{
+			Name:    opts.Title, // Başlığı buraya taşıyarak ikonla yan yana durmasını sağlayabilirsin
+			IconURL: opts.AuthorIcon,
+		}
+		embed.Title = "" // Eğer Author kullandıysan çakışmasın diye normal başlığı boşalt
 	}
 	return embed
 }

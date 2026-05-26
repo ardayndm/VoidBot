@@ -53,3 +53,12 @@ func HasMention(args []string) bool {
 
 	return strings.HasPrefix(args[1], "<@")
 }
+
+// Sunucu bilgilerini getirir
+func GetGuild(s *discordgo.Session, guildID string) (*discordgo.Guild, error) {
+	guild, err := s.Guild(guildID)
+	if err != nil {
+		return nil, err
+	}
+	return guild, nil
+}
