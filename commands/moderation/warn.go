@@ -49,10 +49,10 @@ func (w WarnCommand) Execute(s *discordgo.Session, m *discordgo.MessageCreate, a
 	}
 
 	// ── 5. KENDİNE / BOTA UYARI VERME ────────────────────────────────
-	// if targetID == m.Author.ID {
-	// 	utils.SendError(s, m, utils.ErrSelfAction)
-	// 	return
-	// }
+	if targetID == m.Author.ID {
+		utils.SendError(s, m, utils.ErrSelfAction)
+		return
+	}
 	if targetUser.Bot {
 		utils.SendError(s, m, utils.ErrBotAction)
 		return
@@ -121,15 +121,21 @@ func (w WarnCommand) Execute(s *discordgo.Session, m *discordgo.MessageCreate, a
 	}
 
 	dmErr := utils.SendEmbedDM(s, targetID, utils.EmbedOptions{
-		Title:       "⚠️ Uyarı Aldın",
+		Title:       "Uyarı Aldın",
 		Description: fmt.Sprintf("**%s** sunucusunda bir uyarı aldın.", guildName),
 		Color:       utils.ColorStorm,
 		Thumbnail:   utils.WarningIconURL,
 		AuthorIcon:  guildIcon,
 		Fields: []*discordgo.MessageEmbedField{
 			{Name: "Sebep", Value: reason, Inline: false},
-			{Name: "Moderatör", Value: m.Author.Username, Inline: true},
-			{Name: "Toplam Uyarın", Value: fmt.Sprintf("%d", totalWarnings), Inline: true},
+			{Name: "Moderatör", Value: "*" + m.Author.GlobalName + "*", Inline: true},
+			{Name: "Toplam Uyarın", Value: fmt.Sprintf("**%d**", totalWarnings), Inline: true},
+			// ── Ffooter'ın hemen üstüne gelecek olan yeni açıklama alanı ──
+			{
+				Name:   "\u200b", // Görünmez boşluk karakteri (Başlık çizgisini engeller)
+				Value:  "*Lütfen sunucu kurallarına uymaya özen gösterin, aksi takdirde uzaklaştırılabilirsiniz.*",
+				Inline: false,
+			},
 		},
 		Footer: config.Bot.Name,
 	})
