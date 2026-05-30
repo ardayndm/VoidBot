@@ -94,6 +94,12 @@ func HandleMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 // SyncSlashCommands — kayıtlı slash komutları Discord'a bildirir
 // Bot açılışında bir kere çağrılır
 func SyncSlashCommands(s *discordgo.Session) error {
+	// Listede kayıtlı komut yok ise sessiz kal
+	if len(slashRegistry) == 0 {
+		utils.Logger(utils.INFO, "Discord'a sync edilecek herhangi bir SlashCommands bulunamadı, devam ediliyor.")
+		return nil
+	}
+
 	for _, cmd := range slashRegistry {
 		_, err := s.ApplicationCommandCreate(s.State.User.ID, "", &discordgo.ApplicationCommand{
 			Name:        cmd.Name(),

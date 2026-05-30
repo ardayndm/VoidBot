@@ -45,7 +45,7 @@ info:
 # ! URL İçermek zorunda , Aksi takdirde Mesaj Gönderilemez.
 # ! URL Koyulmayacak ise boş bırakılmalı.
 icons:
-  error: ""
-  warning: ""
-  success: "https://raw.githubusercontent.com/ardayndm/VoidBot/refs/heads/main/icons/success.png"
-  info: ""
+  error: "https://raw.githubusercontent.com/ardayndm/VoidBot/refs/heads/main/icons/core/error.png"
+  warning: "https://raw.githubusercontent.com/ardayndm/VoidBot/refs/heads/main/icons/core/warning.png"
+  success: "https://raw.githubusercontent.com/ardayndm/VoidBot/refs/heads/main/icons/core/success.png"
+  info: "https://raw.githubusercontent.com/ardayndm/VoidBot/refs/heads/main/icons/core/info.png"

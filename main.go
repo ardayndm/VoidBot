@@ -161,6 +161,9 @@ func main() {
 
 	utils.Logger(utils.OK, fmt.Sprintf("%s çalışıyor! (Prefix: %s)", bot.Name, bot.Prefix))
 
+	// Discord'a botun komutlarını bildir
+	events.SyncSlashCommands(BotSession)
+
 	// Graceful shutdown - Ctrl+C bekler
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt, syscall.SIGTERM, syscall.SIGINT)
