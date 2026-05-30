@@ -1,5 +1,7 @@
 # VoidBot
 
+![Banner Açıklaması](https://github.com/ardayndm/VoidBot/blob/main/other/img/VoidBot_Banner.png)
+
 Modern, Modüler Discord Botu
 
 ## Özellikler
