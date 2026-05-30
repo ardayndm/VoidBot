@@ -1,0 +1,5 @@
+# config/color.yaml
+success: "#00ff4c"
+warning: "#ffbf00"
+error: "#ff0011"
+info: "#8f02b3"

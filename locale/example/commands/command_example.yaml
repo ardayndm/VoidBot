@@ -1,0 +1,44 @@
+# ============================================================
+#  locale/example/commands/command_example.yaml
+#  ÖRNEK KOMUT DOSYASI - Kendi komutlarınıza göre uyarlayın
+# ============================================================
+#
+#  NASIL KULLANILIR:
+#  --------------------
+#  1. Her komut için AYRI bir YAML dosyası oluşturun
+#     Örnek: warn.yaml, ban.yaml, daily.yaml, ping.yaml
+#
+#  2. Dosya adı komut adıyla aynı olmalıdır (örnek: warn komutu -> warn.yaml)
+#
+#  3. {user}, {reason}, {count} gibi yer tutucular kullanabilirsiniz
+#     Bunlar komut çalışırken otomatik olarak değiştirilir (tabii kod tarafında bu çevirme işlemini yapıyorsanız)
+#
+#  4. Sadece ihtiyacınız olan alanları kullanın, fazlasını eklemeyin
+#
+#  5. Yeni bir içerik ekleyecekseniz utils/localization.go içindeki structları güncellemek zorundasınız
+#    --(içerik)->  yeni:
+#                   rastgele: "örnek"
+# ============================================================
+
+# ==================== BAŞLIKLAR ====================
+# titles: Mesaj başlıkları (genellikle emoji + kısa açıklama)
+titles:
+  success: "✅ Başarılı"
+  error: "❌ Hata"
+  warning: "⚠️ Uyarı"
+  info: "ℹ️ Bilgi"
+
+# ==================== MESAJLAR ====================
+# messages: Detaylı mesaj içerikleri
+# {placeholder} şeklinde dinamik değişkenler kullanabilirsiniz
+messages:
+  success: "İşlem başarıyla tamamlandı."
+  error: "Bir hata oluştu: {reason}"
+  not_found: "{target} bulunamadı."
+
+# ==================== SEÇENEKLER ====================
+# options: Komutun davranış ayarları (sayı, bool, string vs.)
+options:
+  cooldown: 5 # Saniye cinsinden bekleme süresi
+  max_usage: 10 # Maksimum kullanım sayısı
+  enabled: true # Komut aktif mi

@@ -1,0 +1,6 @@
+# config/bot.yaml
+name: "VoidBot"
+version: "1.0.0"
+author_id: "751851622552043620"
+prefix: "v!"
+lang: "tr"

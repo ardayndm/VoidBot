@@ -1,0 +1,51 @@
+# ============================================================
+#  locales/tr/common.yaml
+#  Dil Dosyası - Türkçe (TR)
+# ============================================================
+
+# ==================== HATA MESAJLARI ====================
+error:
+  title: "❌ Bir Hata Oluştu"
+  messages:
+    no_perm: "Bu komutu kullanmak için gerekli yetkiye sahip değilsiniz."
+    user_not_found: "Belirtilen kullanıcı sunucuda bulunamadı."
+    self_action: "Bu işlemi kendinize uygulayamazsınız."
+    bot_action: "Botlara bu işlemi uygulayamazsınız."
+    higher_role: "Bu kullanıcının rolü sizinkinden daha yüksek."
+    db_error: "Veritabanına bağlanırken bir sorun oluştu."
+    dm_error: "Kullanıcıya özel mesaj gönderilemedi."
+    invalid_input: "Geçersiz giriş. Lütfen doğru formatta girin."
+    timeout: "İşlem zaman aşımına uğradı. Lütfen tekrar deneyin."
+
+# ==================== UYARI MESAJLARI ====================
+warning:
+  title: "⚠️ Uyarı"
+  messages:
+    cooldown: "Bu komutu tekrar kullanmak için **{seconds} saniye** beklemelisiniz."
+    rate_limit: "Çok fazla istek gönderdiniz. Lütfen biraz bekleyin."
+    missing_args: "Eksik parametre. Kullanım: `{usage}`"
+
+# ==================== BAŞARI MESAJLARI ====================
+success:
+  title: "✅ Başarılı"
+  messages:
+    default: "İşlem başarıyla tamamlandı."
+    saved: "Değişiklikler kaydedildi."
+    deleted: "Başarıyla silindi."
+
+# ==================== BİLGİ MESAJLARI ====================
+info:
+  title: "ℹ️ Bilgi"
+  messages:
+    loading: "Yükleniyor, lütfen bekleyin..."
+    not_found: "Aradığınız şey bulunamadı."
+    no_data: "Gösterilecek veri yok."
+
+# ==================== İKONLAR ============================
+# ! URL İçermek zorunda , Aksi takdirde Mesaj Gönderilemez.
+# ! URL Koyulmayacak ise boş bırakılmalı.
+icons:
+  error: ""
+  warning: ""
+  success: "https://raw.githubusercontent.com/ardayndm/VoidBot/refs/heads/main/icons/success.png"
+  info: ""

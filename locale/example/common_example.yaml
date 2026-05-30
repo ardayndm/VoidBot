@@ -1,0 +1,63 @@
+# ============================================================
+#  locales/tr/common.yaml
+#  Dil Dosyası - Türkçe (TR)
+# ============================================================
+#
+#  ÖNEMLİ UYARILAR:
+#  --------------------
+#  1. Yeni bir BAŞLIK (title) eklediğinizde:
+#     -> utils/localization.go içindeki struct'ları GÜNCELLEMELİSİNİZ
+#     -> İlgili komutları da güncellemeyi unutmayın
+#
+#  2. messages içine sadece yeni mesaj EKLEME/ÇIKARMA yaparsanız:
+#     -> SORUN YOK! direkt kullanabilirsiniz
+#     -> localization.go güncellemesi GEREKMEZ
+#
+#  3. İkonlar için emoji veya Unicode karakter kullanabilirsiniz ancak URL önerilir
+#     Örnek: "❌", "⚠️", "✅", "ℹ️"
+# ============================================================
+
+# ==================== HATA MESAJLARI ====================
+error:
+  title: "❌ Bir Hata Oluştu"
+  messages:
+    no_perm: "Bu komutu kullanmak için gerekli yetkiye sahip değilsiniz."
+    user_not_found: "Belirtilen kullanıcı sunucuda bulunamadı."
+    self_action: "Bu işlemi kendinize uygulayamazsınız."
+    bot_action: "Botlara bu işlemi uygulayamazsınız."
+    higher_role: "Bu kullanıcının rolü sizinkinden daha yüksek."
+    db_error: "Veritabanına bağlanırken bir sorun oluştu."
+    dm_error: "Kullanıcıya özel mesaj gönderilemedi."
+    invalid_input: "Geçersiz giriş. Lütfen doğru formatta girin."
+    timeout: "İşlem zaman aşımına uğradı. Lütfen tekrar deneyin."
+
+# ==================== UYARI MESAJLARI ====================
+warning:
+  title: "⚠️ Uyarı"
+  messages:
+    cooldown: "Bu komutu tekrar kullanmak için **{seconds} saniye** beklemelisiniz."
+    rate_limit: "Çok fazla istek gönderdiniz. Lütfen biraz bekleyin."
+    missing_args: "Eksik parametre. Kullanım: `{usage}`"
+
+# ==================== BAŞARI MESAJLARI ====================
+success:
+  title: "✅ Başarılı"
+  messages:
+    default: "İşlem başarıyla tamamlandı."
+    saved: "Değişiklikler kaydedildi."
+    deleted: "Başarıyla silindi."
+
+# ==================== BİLGİ MESAJLARI ====================
+info:
+  title: "ℹ️ Bilgi"
+  messages:
+    loading: "Yükleniyor, lütfen bekleyin..."
+    not_found: "Aradığınız şey bulunamadı."
+    no_data: "Gösterilecek veri yok."
+
+# ==================== İKONLAR ============================
+icons:
+  error: "❌"
+  warning: "⚠️"
+  success: "✅"
+  info: "ℹ️"
