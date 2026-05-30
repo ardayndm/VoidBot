@@ -2,48 +2,58 @@ package utils
 
 import "github.com/bwmarrin/discordgo"
 
-//  Embed - Embed mesaj taslağı
+// EmbedOptions - Embed mesaj taslağı için seçenekler
 type EmbedOptions struct {
 	Title         string
 	Description   string
 	Color         int
 	Fields        []*discordgo.MessageEmbedField
-	Footer        string
-	ThumbnailURL  string // Sağ üst köşedeki .png ikon URL'si
-	AuthorIconURL string // Başlığın solundaki minik .png ikon URL'si
+	FooterText    string // Footer yazısı
+	FooterIconURL string // Footer ikonu (sol alt)
+	ThumbnailURL  string // Sağ üst köşedeki büyük ikon
+	AuthorName    string // Author adı (üst sol)
+	AuthorIconURL string // Author ikonu (üst sol)
+	ImageURL      string // Ortadaki büyük resim
+	URL           string // Embed'e tıklayınca gidilecek link
 }
 
-// Embed - Embed mesajı üretir
+// BuildEmbed - Embed mesajı üretir
 func BuildEmbed(opts EmbedOptions) *discordgo.MessageEmbed {
-
-	// Temel embedi hazırla
 	embed := &discordgo.MessageEmbed{
 		Title:       opts.Title,
 		Description: opts.Description,
 		Color:       opts.Color,
 		Fields:      opts.Fields,
+		URL:         opts.URL,
 	}
 
-	// İmza yazısı ekle (varsa)
-	if opts.Footer != "" {
+	// Footer (en alt - sol)
+	if opts.FooterText != "" || opts.FooterIconURL != "" {
 		embed.Footer = &discordgo.MessageEmbedFooter{
-			Text: opts.Footer,
+			Text:    opts.FooterText,
+			IconURL: opts.FooterIconURL,
 		}
 	}
 
-	// Author ikon ekle (varsa)
-	if opts.AuthorIconURL != "" {
+	// Author (en üst - sol)
+	if opts.AuthorName != "" || opts.AuthorIconURL != "" {
 		embed.Author = &discordgo.MessageEmbedAuthor{
-			Name:    opts.Title,
+			Name:    opts.AuthorName,
 			IconURL: opts.AuthorIconURL,
 		}
-		embed.Title = "" // Author varken normal title'ı çakışma olmasın diye temizle
 	}
 
-	// Thumbnail ikon ekle (varsa)
+	// Thumbnail (sağ üst)
 	if opts.ThumbnailURL != "" {
 		embed.Thumbnail = &discordgo.MessageEmbedThumbnail{
 			URL: opts.ThumbnailURL,
+		}
+	}
+
+	// Image (ortada - büyük resim)
+	if opts.ImageURL != "" {
+		embed.Image = &discordgo.MessageEmbedImage{
+			URL: opts.ImageURL,
 		}
 	}
 

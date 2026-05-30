@@ -1,72 +1,115 @@
 package utils
 
 import (
+	"fmt"
+
 	"github.com/bwmarrin/discordgo"
 )
 
-// RespondError — hata embed'i gönderir
-func RespondErrorEmbed(s *discordgo.Session, t Target, messageKey string) error {
-	guild := getGuildIcon(s, t)
-	return RespondEmbed(s, t, EmbedOptions{
-		Title:         Common().Error.Title,
-		Description:   Common().Error.Messages[messageKey],
-		Color:         ColorsInt.Error,
-		AuthorIconURL: guild,
-		ThumbnailURL:  Common().Icons["error"],
-	})
-}
+// embedType - Embed tipi (error, success, warning, info)
+type embedType string
 
-// RespondSuccess — başarı embed'i gönderir
-func RespondSuccessEmbed(s *discordgo.Session, t Target, messageKey string) error {
-	guild := getGuildIcon(s, t)
-	return RespondEmbed(s, t, EmbedOptions{
-		Title:         Common().Success.Title,
-		Description:   Common().Success.Messages[messageKey],
-		Color:         ColorsInt.Success,
-		AuthorIconURL: guild,
-		ThumbnailURL:  Common().Icons["success"],
-	})
-}
+const (
+	embedError   embedType = "error"
+	embedSuccess embedType = "success"
+	embedWarning embedType = "warning"
+	embedInfo    embedType = "info"
+)
 
-// RespondWarning — uyarı embed'i gönderir
-func RespondWarningEmbed(s *discordgo.Session, t Target, messageKey string) error {
-	guild := getGuildIcon(s, t)
-	return RespondEmbed(s, t, EmbedOptions{
-		Title:         Common().Warning.Title,
-		Description:   Common().Warning.Messages[messageKey],
-		Color:         ColorsInt.Warning,
-		AuthorIconURL: guild,
-		ThumbnailURL:  Common().Icons["warning"],
-	})
-}
+// respondEmbedByType - Genel embed gönderme fonksiyonu
+func respondEmbedByType(s *discordgo.Session, t Target, messageKey, botName string, eType embedType) error {
+	// Common verilerini al
+	common := Common()
 
-// RespondInfo — bilgi embed'i gönderir
-func RespondInfoEmbed(s *discordgo.Session, t Target, messageKey string) error {
-	guild := getGuildIcon(s, t)
-	return RespondEmbed(s, t, EmbedOptions{
-		Title:         Common().Info.Title,
-		Description:   Common().Info.Messages[messageKey],
-		Color:         ColorsInt.Info,
-		AuthorIconURL: guild,
-		ThumbnailURL:  Common().Icons["info"],
-	})
-}
+	// Embed tipine göre verileri seç
+	var title, message, iconKey string
+	var color int
 
-// getGuildIcon — target'a göre guild ikonunu çeker
-func getGuildIcon(s *discordgo.Session, t Target) string {
-	if t.Interaction != nil {
-		guild, err := GetGuild(s, t.Interaction.GuildID)
-		if err != nil {
-			return ""
-		}
-		return guild.IconURL("128")
+	switch eType {
+	case embedError:
+		title = common.Error.Title
+		message = getMessage(common.Error.Messages, messageKey)
+		iconKey = "error"
+		color = ColorsInt.Error
+	case embedSuccess:
+		title = common.Success.Title
+		message = getMessage(common.Success.Messages, messageKey)
+		iconKey = "success"
+		color = ColorsInt.Success
+	case embedWarning:
+		title = common.Warning.Title
+		message = getMessage(common.Warning.Messages, messageKey)
+		iconKey = "warning"
+		color = ColorsInt.Warning
+	case embedInfo:
+		title = common.Info.Title
+		message = getMessage(common.Info.Messages, messageKey)
+		iconKey = "info"
+		color = ColorsInt.Info
+	default:
+		return fmt.Errorf("bilinmeyen embed tipi: %s", eType)
 	}
-	if t.Message != nil {
-		guild, err := GetGuild(s, t.Message.GuildID)
-		if err != nil {
-			return ""
-		}
-		return guild.IconURL("128")
+
+	if message == "" {
+		message = "ERR"
 	}
+
+	// Embed seçeneklerini hazırla
+	embedOpt := EmbedOptions{
+		Title:        title,
+		Description:  message,
+		Color:        color,
+		ThumbnailURL: common.Icons[iconKey],
+		FooterText:   getOrDefault(botName, "VoidBot"),
+	}
+
+	// Sunucu adını al (varsa)
+	if guildName, err := GetGuildName(s, t.GetGuildID()); err == nil && guildName != "" {
+		embedOpt.AuthorName = guildName
+	}
+
+	// İkonları ayarla (sunucu ikonu yoksa bot ikonu kullan)
+	embedOpt.AuthorIconURL = getOrDefault(GetGuildIcon(s, t), common.Icons["bot"])
+	embedOpt.FooterIconURL = getOrDefault(GetBotAvatarURL(s), common.Icons["bot"])
+
+	return RespondEmbed(s, t, embedOpt)
+}
+
+// getMessage - Mesaj map'inden mesajı alır, yoksa hata loglar
+func getMessage(messages map[string]string, key string) string {
+	if msg, exists := messages[key]; exists && msg != "" {
+		return msg
+	}
+	Logger(ERROR, fmt.Sprintf("Mesaj anahtarı bulunamadı: %s", key))
 	return ""
+}
+
+// getOrDefault - Değer boşsa varsayılanı döndürür
+func getOrDefault(value, defaultValue string) string {
+	if value == "" {
+		return defaultValue
+	}
+	return value
+}
+
+// ==================== PUBLIC FONKSİYONLAR ====================
+
+// RespondErrorEmbed — hata embed'i gönderir
+func RespondErrorEmbed(s *discordgo.Session, t Target, messageKey, botName string) error {
+	return respondEmbedByType(s, t, messageKey, botName, embedError)
+}
+
+// RespondSuccessEmbed — başarı embed'i gönderir
+func RespondSuccessEmbed(s *discordgo.Session, t Target, messageKey, botName string) error {
+	return respondEmbedByType(s, t, messageKey, botName, embedSuccess)
+}
+
+// RespondWarningEmbed — uyarı embed'i gönderir
+func RespondWarningEmbed(s *discordgo.Session, t Target, messageKey, botName string) error {
+	return respondEmbedByType(s, t, messageKey, botName, embedWarning)
+}
+
+// RespondInfoEmbed — bilgi embed'i gönderir
+func RespondInfoEmbed(s *discordgo.Session, t Target, messageKey, botName string) error {
+	return respondEmbedByType(s, t, messageKey, botName, embedInfo)
 }

@@ -1,19 +1,25 @@
 # ============================================================
-#  locales/tr/common.yaml
-#  Dil Dosyası - Türkçe (TR)
+#  locales/tr/common_example.yaml
+#  Dil Dosyası Örneği - Türkçe (TR)
+#  Bu dosyayı kopyalayıp common.yaml olarak kullanın
 # ============================================================
+
+# ==================== ÖNEMLİ UYARILAR ====================
 #
-#  ÖNEMLİ UYARILAR:
-#  --------------------
-#  1. Yeni bir BAŞLIK (title) eklediğinizde:
-#     -> utils/localization.go içindeki struct'ları GÜNCELLEMELİSİNİZ
-#     -> İlgili komutları da güncellemeyi unutmayın
+# 1. Yeni bir BAŞLIK (title) eklediğinizde:
+#    -> utils/localization.go içindeki struct'ları GÜNCELLEMELİSİNİZ
+#    -> İlgili komutları da güncellemeyi unutmayın
 #
-#  2. messages içine sadece yeni mesaj EKLEME/ÇIKARMA yaparsanız:
-#     -> SORUN YOK! direkt kullanabilirsiniz
-#     -> localization.go güncellemesi GEREKMEZ
+# 2. messages içine sadece yeni mesaj EKLEME/ÇIKARMA yaparsanız:
+#    -> SORUN YOK! direkt kullanabilirsiniz
+#    -> localization.go güncellemesi GEREKMEZ
 #
-#  3. İkonlar için URL kullanmalısınız
+# 3. İkonlar için GEÇERLİ BİR URL kullanmalısınız
+#    -> URL yoksa boş bırakın ("")
+#    -> Örnek: "https://example.com/icons/bot.png"
+#
+# 4. {placeholder} şeklindeki değişkenler kod tarafında doldurulur
+#    -> Mevcut placeholder'lar: {seconds}, {usage}, {user}, {reason}
 # ============================================================
 
 # ==================== HATA MESAJLARI ====================
@@ -55,10 +61,27 @@ info:
     no_data: "Gösterilecek veri yok."
 
 # ==================== İKONLAR ============================
-# ! URL İçermek zorunda , Aksi takdirde Mesaj Gönderilemez.
-# ! URL Koyulmayacak ise boş bırakılmalı.
+# ! GEÇERLİ BİR URL olmalıdır, aksi takdirde mesaj gönderilemez
+# ! URL koyulmayacak ise boş bırakın ("")
 icons:
-  error: ""
-  warning: ""
-  success: ""
-  info: ""
+  error: "https://your-cdn.com/icons/error.png"
+  warning: "https://your-cdn.com/icons/warning.png"
+  success: "https://your-cdn.com/icons/success.png"
+  info: "https://your-cdn.com/icons/info.png"
+  bot: "https://your-cdn.com/icons/bot.png"
+
+# ==================== ORTAK KULLANIM ====================
+shared:
+  by: "tarafından"
+  reason: "Sebep"
+  at: "tarihinde"
+
+# ==================== ZAMAN BİRİMLERİ ====================
+duration:
+  second: "saniye"
+  minute: "dakika"
+  hour: "saat"
+  day: "gün"
+  week: "hafta"
+  month: "ay"
+  year: "yıl"

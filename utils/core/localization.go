@@ -10,11 +10,13 @@ type MessageSection struct {
 
 // Localization - common.yaml ile birebir eşleşir
 type CommonLocale struct {
-	Error   MessageSection    `yaml:"error"`
-	Warning MessageSection    `yaml:"warning"`
-	Success MessageSection    `yaml:"success"`
-	Info    MessageSection    `yaml:"info"`
-	Icons   map[string]string `yaml:"icons"`
+	Error    MessageSection    `yaml:"error"`
+	Warning  MessageSection    `yaml:"warning"`
+	Success  MessageSection    `yaml:"success"`
+	Info     MessageSection    `yaml:"info"`
+	Icons    map[string]string `yaml:"icons"`
+	Shared   map[string]string `yaml:"shared"`
+	Duration map[string]string `yaml:"duration"`
 }
 
 // Localization -  Her komutun yaml yapısı (command_example.yaml patterni)

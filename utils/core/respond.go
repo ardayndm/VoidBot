@@ -14,22 +14,21 @@ type Target struct {
 	Ephemeral   bool
 }
 
+// Respond - Target'tan guild ID'sini alır
+func (t *Target) GetGuildID() string {
+	if t.Interaction != nil {
+		return t.Interaction.GuildID
+	}
+	if t.Message != nil {
+		return t.Message.GuildID
+	}
+	return ""
+}
+
 // Respond - Mesaj veya interaction'a embed gönderir
 func RespondEmbed(s *discordgo.Session, t Target, opts EmbedOptions) error {
 
-	// URL Yanlış formatta ise kaldır , aksi takdirde mesaj hiç gönderilemez
-	authorUrl := opts.AuthorIconURL
-	if !strings.HasPrefix(authorUrl, "http://") && !strings.HasPrefix(authorUrl, "https://") {
-		opts.AuthorIconURL = ""
-		Logger(WARNING, "Respond - Author URL geçersiz formatta , Mesajdan kaldırdıldı. (http:// veya https:// ile başlamalı)")
-	}
-
-	// URL Yanlış formatta ise kaldır , aksi takdirde mesaj hiç gönderilemez
-	thumbUrl := opts.ThumbnailURL
-	if !strings.HasPrefix(thumbUrl, "http://") && !strings.HasPrefix(thumbUrl, "https://") {
-		opts.AuthorIconURL = ""
-		Logger(WARNING, "Respond - Thumbnail URL geçersiz formatta , Mesajdan kaldırdıldı. (http:// veya https:// ile başlamalı)")
-	}
+	checkUrlFormats(&opts)
 
 	// Mesaj tipi Etkileşimli/slash mesaj ise
 	if t.Interaction != nil {
@@ -57,4 +56,28 @@ func RespondEmbed(s *discordgo.Session, t Target, opts EmbedOptions) error {
 	}
 
 	return nil
+}
+
+func checkUrlFormats(opts *EmbedOptions) {
+
+	// URL Yanlış formatta ise kaldır , aksi takdirde mesaj hiç gönderilemez
+	authorUrl := opts.AuthorIconURL
+	if !strings.HasPrefix(authorUrl, "http://") && !strings.HasPrefix(authorUrl, "https://") {
+		opts.AuthorIconURL = ""
+		Logger(WARNING, "Respond - Author URL geçersiz formatta , Mesajdan kaldırdıldı. (http:// veya https:// ile başlamalı)")
+	}
+
+	// URL Yanlış formatta ise kaldır , aksi takdirde mesaj hiç gönderilemez
+	thumbUrl := opts.ThumbnailURL
+	if !strings.HasPrefix(thumbUrl, "http://") && !strings.HasPrefix(thumbUrl, "https://") {
+		opts.AuthorIconURL = ""
+		Logger(WARNING, "Respond - Thumbnail URL geçersiz formatta , Mesajdan kaldırdıldı. (http:// veya https:// ile başlamalı)")
+	}
+
+	// URL Yanlış formatta ise kaldır , aksi takdirde mesaj hiç gönderilemez
+	footerUrl := opts.FooterIconURL
+	if !strings.HasPrefix(footerUrl, "http://") && !strings.HasPrefix(footerUrl, "https://") {
+		opts.FooterIconURL = ""
+		Logger(WARNING, "Respond - Footer URL geçersiz formatta , Mesajdan kaldırdıldı. (http:// veya https:// ile başlamalı)")
+	}
 }
