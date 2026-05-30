@@ -1,0 +1,40 @@
+# ============================================================
+#  locales/tr/presence.yaml
+#  Bot Durum Mesajları - Türkçe (TR)
+# ============================================================
+
+# ==================== AKTİVİTELER ====================
+# Botun "oynuyor", "izliyor", "dinliyor" kısımları
+# {bot_name} -> Botun kendi ismi ile değişir
+
+activities:
+  # - name: "v!yardım"
+  #   type: "listening" # listening, playing, watching, streaming, competing
+  #   url: "" # Sadece streaming için gerekli
+
+  - name: "{bot_name} | v!yardım"
+    type: "watching"
+
+  - name: "github.com/ardayndm/VoidBot"
+    type: "streaming"
+    url: "https://github.com/ardayndm/VoidBot"
+
+  - name: "açık kaynak kodlu"
+    type: "competing"
+
+  - name: "v!yardım"
+    type: "listening"
+
+  - name: "{bot_name}"
+    type: "playing"
+
+  - name: "senin için"
+    type: "watching"
+
+# ==================== DURUM ====================
+# online, idle, dnd, invisible
+status: "online"
+
+# ==================== SÜRE ====================
+# Saniye cinsinden değişim aralığı
+interval: 15

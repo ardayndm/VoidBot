@@ -161,6 +161,9 @@ func main() {
 
 	utils.Logger(utils.OK, fmt.Sprintf("%s çalışıyor! (Prefix: %s)", bot.Name, bot.Prefix))
 
+	// Aktivite değiştiriciyi başlat
+	startBotPresence()
+
 	// Discord'a botun komutlarını bildir
 	events.SyncSlashCommands(BotSession)
 
@@ -173,7 +176,18 @@ func main() {
 	shutdown()
 }
 
-// shutdown - Kaynakları temizler
+// Main - Bot aktivitesini değiştirir
+func startBotPresence() {
+	utils.Logger(utils.INFO, "Aktivite değiştirici başlatılıyor...")
+	// Bot adını al
+	botUser, _ := BotSession.User("@me")
+	botName := botUser.Username
+
+	// Rastgele presence başlat
+	utils.StartRandomPresence(BotSession, botName, config.GetBot().Lang)
+}
+
+// Main - Kaynakları temizler
 func shutdown() {
 	if database.DB != nil {
 		database.DB.Close()

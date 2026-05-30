@@ -1,0 +1,71 @@
+# ============================================================
+#  locales/tr/presence_example.yaml
+#  Bot Durum Mesajları Örneği - Türkçe (TR)
+#  Bu dosyayı kopyalayıp presence.yaml olarak kullanın
+# ============================================================
+
+# ==================== ÖNEMLİ UYARILAR ====================
+#
+# 1. Bu dosyadaki TÜM ALANLAR OPSİYONELDİR!
+#    -> Eksik olursa bot varsayılan değerleri kullanır
+#    -> Eksik bırakılması önerilmez !
+#
+# 2. activities listesi boş olabilir, varsayılan liste kullanılır
+#
+# 3. type alanı için geçerli değerler:
+#    -> playing   (oynuyor)
+#    -> watching  (izliyor)
+#    -> listening (dinliyor)
+#    -> streaming (yayında)
+#    -> competing (yarışıyor)
+#
+# 4. streaming tipi için url alanı ZORUNLUDUR
+#    -> Örnek: "https://github.com/ardayndm/VoidBot"
+#
+# 5. {bot_name} placeholder'ı botun kendi adı ile değişir
+# ============================================================
+
+# ==================== AKTİVİTELER ====================
+# Botun "oynuyor", "izliyor", "dinliyor" kısımları
+# İstediğiniz kadar aktivite ekleyebilirsiniz
+
+activities:
+  # Örnek 1: İzliyor
+  - name: "{bot_name} | v!yardım"
+    type: "watching"
+    url: ""
+
+  # Örnek 2: Yayında (GitHub linki)
+  - name: "github.com/ardayndm/VoidBot"
+    type: "streaming"
+    url: "https://github.com/ardayndm/VoidBot"
+
+  # Örnek 3: Yarışıyor
+  - name: "açık kaynak kodlu"
+    type: "competing"
+    url: ""
+
+  # Örnek 4: Dinliyor
+  - name: "v!yardım"
+    type: "listening"
+    url: ""
+
+  # Örnek 5: Oynuyor
+  - name: "{bot_name}"
+    type: "playing"
+    url: ""
+
+  # Örnek 6: İzliyor
+  - name: "senin için"
+    type: "watching"
+    url: ""
+
+# ==================== DURUM ====================
+# online, idle, dnd, invisible
+# Varsayılan: "online"
+status: "online"
+
+# ==================== SÜRE ====================
+# Saniye cinsinden değişim aralığı
+# Varsayılan: 10 saniye
+interval: 15
