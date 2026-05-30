@@ -1,7 +1,8 @@
 package database
 
 import (
-	"VoidBot/config"
+	config "VoidBot/config/core"
+	database "VoidBot/database/core"
 	"context"
 	"database/sql"
 	"fmt"
@@ -55,7 +56,7 @@ func (m *MysqlDB) Query(ctx context.Context, query string, args ...interface{}) 
 func (m *MysqlDB) QueryRow(ctx context.Context, query string, args ...interface{}) *sql.Row {
 	return m.db.QueryRowContext(ctx, query, args...)
 }
- 
+
 // Exec - INSERT, UPDATE, DELETE gibi değişiklik yapan sorgular
 func (m *MysqlDB) Exec(ctx context.Context, query string, args ...interface{}) (sql.Result, error) {
 	return m.db.ExecContext(ctx, query, args...)
@@ -72,7 +73,7 @@ func (m *MysqlDB) Get(ctx context.Context, dest interface{}, query string, args 
 }
 
 // BeginTx - transaction başlatır (ya hep ya hiç)
-func (m *MysqlDB) BeginTx(ctx context.Context, opts *sql.TxOptions) (Transaction, error) {
+func (m *MysqlDB) BeginTx(ctx context.Context, opts *sql.TxOptions) (database.Transaction, error) {
 	tx, err := m.db.BeginTxx(ctx, opts)
 	if err != nil {
 		return nil, err

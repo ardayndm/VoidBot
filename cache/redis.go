@@ -1,11 +1,12 @@
 package cache
 
 import (
-	"VoidBot/config"
+	config "VoidBot/config/core"
 	"context"
 	"fmt"
-	"github.com/redis/go-redis/v9"
 	"time"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type RedisCache struct {

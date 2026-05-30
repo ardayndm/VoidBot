@@ -13,8 +13,7 @@
 #     -> SORUN YOK! direkt kullanabilirsiniz
 #     -> localization.go güncellemesi GEREKMEZ
 #
-#  3. İkonlar için emoji veya Unicode karakter kullanabilirsiniz ancak URL önerilir
-#     Örnek: "❌", "⚠️", "✅", "ℹ️"
+#  3. İkonlar için URL kullanmalısınız
 # ============================================================
 
 # ==================== HATA MESAJLARI ====================
@@ -56,8 +55,10 @@ info:
     no_data: "Gösterilecek veri yok."
 
 # ==================== İKONLAR ============================
+# ! URL İçermek zorunda , Aksi takdirde Mesaj Gönderilemez.
+# ! URL Koyulmayacak ise boş bırakılmalı.
 icons:
-  error: "❌"
-  warning: "⚠️"
-  success: "✅"
-  info: "ℹ️"
+  error: ""
+  warning: ""
+  success: ""
+  info: ""

@@ -1,8 +1,8 @@
 package storage
 
 import (
-	"VoidBot/cache"
-	"VoidBot/database"
+	cache "VoidBot/cache/core"
+	database "VoidBot/database/core"
 	"fmt"
 )
 

@@ -1,7 +1,7 @@
 package config
 
 import (
-	"VoidBot/utils"
+	utils "VoidBot/utils/core"
 	"fmt"
 	"os"
 	"strconv"
@@ -75,7 +75,7 @@ func loadBotConfig(cfg *Config) error {
 		return fmt.Errorf("BOT_TOKEN bulunamadı")
 	}
 
-	if err := utils.ReadYaml("config/bot.yaml", &cfg.Bot); err != nil {
+	if err := utils.ReadYaml("config/core/bot.yaml", &cfg.Bot); err != nil {
 		return err
 	}
 

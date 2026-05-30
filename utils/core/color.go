@@ -27,7 +27,7 @@ func InitColors() error {
 	}{}
 
 	// Renkleri yamldan oku
-	if err := ReadYaml("config/color.yaml", raw); err != nil {
+	if err := ReadYaml("config/core/color.yaml", raw); err != nil {
 		return err
 	}
 

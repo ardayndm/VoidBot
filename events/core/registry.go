@@ -1,8 +1,8 @@
 package events
 
 import (
-	"VoidBot/config"
-	"VoidBot/utils"
+	config "VoidBot/config/core"
+	utils "VoidBot/utils/core"
 	"strings"
 
 	"github.com/bwmarrin/discordgo"

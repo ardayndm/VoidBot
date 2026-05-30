@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"VoidBot/utils"
+	utils "VoidBot/utils/core"
 	"fmt"
 	"os"
 	"path/filepath"

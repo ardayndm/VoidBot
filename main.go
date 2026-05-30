@@ -2,11 +2,11 @@ package main
 
 import (
 	"VoidBot/cache"
-	"VoidBot/config"
+	config "VoidBot/config/core"
 	"VoidBot/database"
-	"VoidBot/events"
-	"VoidBot/storage"
-	"VoidBot/utils"
+	events "VoidBot/events/core"
+	storage "VoidBot/storage/core"
+	utils "VoidBot/utils/core"
 	"fmt"
 	"os"
 	"os/signal"
