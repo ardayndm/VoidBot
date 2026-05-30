@@ -68,7 +68,11 @@ func HandleMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	prefix := config.AppConfig.Bot.Prefix
-	
+
+	utils.RespondSuccessEmbed(s, utils.Target{
+		Message: m,
+	}, "default", config.GetBot().Name)
+
 	// Prefix ile başlıyor mu?
 	if !strings.HasPrefix(m.Content, prefix) {
 		return
