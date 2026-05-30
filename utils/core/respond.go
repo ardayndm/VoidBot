@@ -70,7 +70,7 @@ func checkUrlFormats(opts *EmbedOptions) {
 	// URL Yanlış formatta ise kaldır , aksi takdirde mesaj hiç gönderilemez
 	thumbUrl := opts.ThumbnailURL
 	if !strings.HasPrefix(thumbUrl, "http://") && !strings.HasPrefix(thumbUrl, "https://") {
-		opts.AuthorIconURL = ""
+		opts.ThumbnailURL = ""
 		Logger(WARNING, "Respond - Thumbnail URL geçersiz formatta , Mesajdan kaldırdıldı. (http:// veya https:// ile başlamalı)")
 	}
 
