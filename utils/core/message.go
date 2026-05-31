@@ -60,7 +60,7 @@ func respondEmbedByType(s *discordgo.Session, t Target, messageKey, botName stri
 		Description:  message,
 		Color:        color,
 		ThumbnailURL: common.Icons[iconKey],
-		FooterText:   getOrDefault(botName, "VoidBot"),
+		FooterText:   GetOrDefault(botName, "VoidBot"),
 	}
 
 	// Sunucu adını al (varsa)
@@ -69,9 +69,7 @@ func respondEmbedByType(s *discordgo.Session, t Target, messageKey, botName stri
 	}
 
 	// İkonları ayarla (sunucu ikonu yoksa bot ikonu kullan)
-	embedOpt.AuthorIconURL = getOrDefault(GetGuildIcon(s, t), common.Icons["bot"])
-	embedOpt.FooterIconURL = getOrDefault(GetBotAvatarURL(s), common.Icons["bot"])
-
+	embedOpt.AuthorIconURL = GetOrDefault(GetGuildIcon(s, t), common.Icons["bot"])
 	return RespondEmbed(s, t, embedOpt)
 }
 
@@ -85,7 +83,7 @@ func getMessage(messages map[string]string, key string) string {
 }
 
 // getOrDefault - Değer boşsa varsayılanı döndürür
-func getOrDefault(value, defaultValue string) string {
+func GetOrDefault(value, defaultValue string) string {
 	if value == "" {
 		return defaultValue
 	}
